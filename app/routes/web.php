@@ -3,11 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConProdController;
 
-//$con = pg_connect("host='localhost' dbname=ikea2 port=5433 user=postgres password='admin'");
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,11 +20,17 @@ use App\Http\Controllers\ConProdController;
 
 
 
-Route::get('/' ,[ConProdController::class, 'MenuConProd1'])->name('ConProdAll');
-Route::get('producto/addProduct', [ConProdController::class, 'AddProd'])->name('AddProduct');
-Route::get('producto/{id}', [ConProdController::class, 'ConProdEsp'])->name('ConEsp');
-Route::post('addproduc', [ConProdController::class, 'store'])->name('productStore');
-Route::get('producto/{id}/edit', [ConProdController::class, 'edit'])->name('editProd');
-Route::put('producto/{id}/update', [ConProdController::class, 'update'])->name('ProdUpdate');
+Route::get('/catalogo' ,[ConProdController::class, 'MenuConProd1'])->name('producto.ConProdAll');
+Route::get('producto/addProduct', [ConProdController::class, 'AddProd'])->name('producto.AddProduct');
+Route::get('producto/{id}', [ConProdController::class, 'ConProdEsp'])->name('producto.ConEsp');
+Route::post('addproduc', [ConProdController::class, 'store'])->name('producto.productStore');
+Route::get('producto/{id}/edit', [ConProdController::class, 'edit'])->name('producto.editProd');
+Route::put('producto/{id}/update', [ConProdController::class, 'update'])->name('producto.ProdUpdate'); 
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
 
 ?>
+

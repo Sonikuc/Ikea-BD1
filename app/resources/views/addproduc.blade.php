@@ -4,7 +4,7 @@
 
 @section ('content')
    <h1>Agregar Producto</h1>
-   <form action="{{route('productStore')}}" method="POST">
+   <form action="{{route('producto.productStore')}}" method="POST">
 
         @csrf
 

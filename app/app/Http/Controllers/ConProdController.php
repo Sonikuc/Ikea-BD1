@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Producto;
+use App\Http\Requests\StoreProducto;
 use Illuminate\Http\Request;
 
 class ConProdController extends Controller
@@ -27,8 +28,8 @@ class ConProdController extends Controller
 
     }
 
-    public function store(Request $request){
-        
+    public function store(StoreProducto $request){
+      /*  
         $request->validate([
             'name' => 'required',
             'nsueco' => 'required',
@@ -38,8 +39,8 @@ class ConProdController extends Controller
             'instrucc' => 'required',
             'descrip' => 'required'
         ]);
-
-        $prod = new Producto;
+*/
+    /*    $prod = new Producto;
 
         $prod->name = $request->name;
         $prod->nsueco = $request->nsueco;
@@ -49,9 +50,11 @@ class ConProdController extends Controller
         $prod->instrucc = $request->instrucc;
         $prod->descrip = $request->descrip;
 
-        $prod->save();
+        $prod->save();*/
+
+        $prod = Producto::create($request->all());
         
-        return redirect()->route('ConEsp', $prod->id);
+        return redirect()->route('producto.ConEsp', $prod->id);
 
 
     }
@@ -63,9 +66,9 @@ class ConProdController extends Controller
     }
 
     public function update($id, Request $request){
-
+/*
         $request->validate([
-            'name' => 'required',
+           /* 'name' => 'required',
             'nsueco' => 'required',
             'montaje' => 'required',
             'tipo' => 'required|max:3',
@@ -73,9 +76,9 @@ class ConProdController extends Controller
             'instrucc' => 'required',
             'descrip' => 'required'
         ]);
-
+*/
         $prod = Producto::find($id);
-        $prod->name = $request->name;
+      /*  $prod->name = $request->name;
         $prod->nsueco = $request->nsueco;
         $prod->montaje = $request->montaje;
         $prod->tipo = $request->tipo;
@@ -83,9 +86,11 @@ class ConProdController extends Controller
         $prod->instrucc = $request->instrucc;
         $prod->descrip = $request->descrip;
 
-        $prod->save();
+        $prod->save(); */
+
+        $prod->update($request->all());
         
-        return redirect()->route('ConEsp', $prod->id);
+        return redirect()->route('producto.ConEsp', $prod->id);
 
 
     }

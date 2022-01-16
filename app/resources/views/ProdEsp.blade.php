@@ -13,8 +13,8 @@
     
     
     
-    <a href="{{route('editProd', $prod)}}">Editar Informacion</a> <br> <br>
-    <a href="{{route('ConProdAll')}}">Volver al inicio</a>
+    <a href="{{route('producto.editProd', $prod)}}">Editar Informacion</a> <br> <br>
+    <a href="{{route('producto.ConProdAll')}}">Volver al inicio</a>
 
 @endsection
   

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Productos extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class Productos extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('productos', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
             $table->string('name')->nullable(false);  //almacena 256 caracteres
             $table->string('nsueco')->nullable(false);
             $table->boolean('montaje')->nullable(false);
@@ -23,10 +22,20 @@ class Productos extends Migration
             $table->text('caract')->nullable(false);
             $table->text('instrucc')->nullable(false);
             $table->text('descrip')->nullable(false);
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
+           $table->unsignedBigInteger('type_id')->nullable();
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('type_products')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
             $table->timestamps(); //created at - update at
         });
-
-       // DB::statement('ALTER TABLE productos ADD CONSTRAINT chk_tipo CHECK (tipo in ('sim','com'));');
     }
 
     /**
@@ -36,6 +45,6 @@ class Productos extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('products');
     }
 }

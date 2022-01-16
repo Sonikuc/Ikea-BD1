@@ -5,7 +5,7 @@
 @section ('content')
     <h1>Modificando Informacion</h1>
 
-    <form action="{{route('ProdUpdate', $prod)}}" method="post">
+    <form action="{{route('producto.ProdUpdate', $prod)}}" method="post">
 
         @csrf
 
